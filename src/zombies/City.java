@@ -14,6 +14,7 @@ public class City {
 	 */
 	private boolean walls[][];
 	private int width, height;
+  private Human[] humanArr;
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -26,6 +27,7 @@ public class City {
 		width = w;
 		height = h;
 		walls = new boolean[w][h];
+    humanArr = new Human[numP];
 
 		randomBuildings(numB);
 		populate(numP);
@@ -40,7 +42,20 @@ public class City {
 	 */
 	private void populate(int numPeople)
 	{
-		// Generate numPeople new humans randomly placed around the city.
+    for(int i = 0; i < numPeople; i++)
+    {
+      int xl = Helper.nextInt(width);
+      int yl = Helper.nextInt(height);
+      while(walls[xl][yl] == true)
+      {
+        xl = Helper.nextInt(width);
+        yl = Helper.nextInt(height);
+      }
+      humanArr[i] = new Human(xl, yl, Helper.nextInt(3), walls);
+      //then draw humanArr[i]
+      ZombieSim.dp.setPenColor(Color.PINK);
+      ZombieSim.dp.drawDot(xl, yl);
+    }
 	}
 
 
@@ -78,7 +93,10 @@ public class City {
 	 * Updates the state of the city for a time step.
 	 */
 	public void update() {
-		// Move humans, zombies, etc
+		for(int i = 0; i<humanArr.length; i++)
+    {
+      humanArr[i].move();
+    }
 	}
 
 	/**
