@@ -10,10 +10,10 @@ public class Human extends Person{
 
   public void move()
   {
-    int turn = Helper.nextInt(9);
+    int turn = Helper.nextInt(10);
     if(turn == 0)
     {
-      this.direction = Helper.nextInt(3);
+      this.direction = Helper.nextInt(4);
       
     }
     if(this.direction == 0)
