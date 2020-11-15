@@ -52,9 +52,6 @@ public class City {
         yl = Helper.nextInt(height);
       }
       humanArr[i] = new Human(xl, yl, Helper.nextInt(3), walls);
-      //then draw humanArr[i]
-      ZombieSim.dp.setPenColor(Color.PINK);
-      ZombieSim.dp.drawDot(xl, yl);
     }
 	}
 
@@ -107,6 +104,7 @@ public class City {
 		ZombieSim.dp.clear(Color.black);
 
 		drawWalls();
+    drawHumans();
 	}
 
 	/**
@@ -127,5 +125,14 @@ public class City {
 			}
 		}
 	}
+
+  private void drawHumans()
+  {
+    ZombieSim.dp.setPenColor(Color.PINK);
+    for(int i = 0; i<humanArr.length; i++)
+    {
+      ZombieSim.dp.drawDot(humanArr[i].xLoc, humanArr[i].yLoc);
+    }
+  }
 
 }
