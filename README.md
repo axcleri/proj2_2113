@@ -5,6 +5,8 @@
 
 - add your UML diagram here 
 
+![diagram](https://github.com/fall20-2113/p2-axcleri/blob/main/umldia.png)
+
 # Phase 1:
 
 - create a new **branch** called `phase 1` and implement your phase 1 code in there
