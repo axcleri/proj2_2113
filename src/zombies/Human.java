@@ -32,6 +32,70 @@ public class Human extends Person{
 
   public void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ)
   {
+    //check for zombies within a ten space radius
+    for(int i = 0; i < zombieArrZ.size(); i++)
+    {
+      //if the human is facing north and there is a zombie within ten spaces north
+      if(this.direction == 0)
+      {
+          if((0 < (zombieArrZ.get(i).gety() - this.yLoc)) && ((zombieArrZ.get(i).gety() - this.yLoc) <= 10)&& (humanArrZ.get(i).getx() == this.xLoc))
+          {
+            //if the human cannot run away from that zombie because of a wall continue on to check for other zombies
+            //if the human can run away turn and move two spaces in other direction
+            if((this.yLoc-2>=0)&&(cit[this.xLoc][this.yLoc-2]==false))
+            {
+              this.direction = 2;
+              this.yLoc-=2;
+              return;
+            }
+          }
+      }
+      //if the human is facing east and there is a zombie within ten spaces east
+      else if (this.direction == 1)
+      {
+          if((0 <(zombieArrZ.get(i).getx() - this.xLoc)) && ((zombieArrZ.get(i).getx() - this.xLoc) <= 10) && (zombieArrZ.get(i).gety() == this.yLoc))
+          {
+            //if the human cannot run away from that zombie because of a wall continue on to check for other zombies
+            //if the human can run away turn and move two spaces in other direction
+            if((this.xLoc-2>=0)&&(cit[this.xLoc-2][this.yLoc]==false))
+            {
+              this.direction = 3;
+              this.xLoc-=2;
+              return;
+            }
+          }
+      }
+      //if the human is facing south and there is a zombie within ten spaces south
+      else if(this.direction == 2)
+      {
+          if((-10 < (zombieArrZ.get(i).gety() - this.yLoc)) && ((zombieArrZ.get(i).gety() - this.yLoc) <= 0) && (humanArrZ.get(i).getx() == this.xLoc))
+          {
+            //if the human cannot run away from that zombie because of a wall continue on to check for other zombies
+            //if the human can run away turn and move two spaces in other direction
+            if((this.yLoc+2<cit[0].length)&&(cit[this.xLoc][this.yLoc+2]==false))
+            {
+              this.direction = 0;
+              this.yLoc+=2;
+              return;
+            }
+          }
+      }
+      //if the human is facing west and there is a zombie within ten spaces west
+      else
+      {
+          if((-10 < (zombieArrZ.get(i).getx() - this.xLoc)) && ((zombieArrZ.get(i).getx() - this.xLoc) <= 0) && (humanArrZ.get(i).gety() == this.yLoc))
+          {
+            //if the human cannot run away from that zombie because of a wall continue on to check for other zombies
+            //if the human can run away turn and move two spaces in other direction
+            if((this.xLoc+2<cit.length)&&(cit[this.xLoc+2][this.yLoc]==false))
+            {
+              this.direction = 1;
+              this.xLoc+=2;
+              return;
+            }
+          }
+      }
+    }
     int turn = Helper.nextInt(10);
     if(turn == 0)
     {

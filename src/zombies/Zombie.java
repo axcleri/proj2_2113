@@ -10,6 +10,26 @@ public class Zombie extends Person{
     }
     //for directions, 0 is north, 1 is east, 2 is south, 3 is west
 
+  public int getx()
+  {
+    return xLoc;
+  }
+
+  public int gety()
+  {
+    return yLoc;
+  }
+
+  public int getdir()
+  {
+    return direction;
+  }
+
+  public boolean[][] getw()
+  {
+    return cit;
+  }
+
     public void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ)
     {
       //if there is a human adjacent to the zombie turn human into zombie
@@ -31,36 +51,42 @@ public class Zombie extends Person{
         {
           if((this.yLoc+1<cit[0].length)&&(cit[this.xLoc][this.yLoc+1] == false))
           {
-            if(0 < (humanArrZ.get(i).gety() - this.yLoc) && (humanArrZ.get(i).gety() - this.yLoc) <= 10)
+            if((0 < (humanArrZ.get(i).gety() - this.yLoc)) && ((humanArrZ.get(i).gety() - this.yLoc) <= 10)&& (humanArrZ.get(i).gety() == this.yLoc))
             {
               this.yLoc++;
+              return;
             }
+
           }
-          return;
+
         }
         //if the zombie is facing east and there is a human within ten spaces east
         else if (this.direction == 1)
         {
           if((this.xLoc+1<cit.length)&&(cit[this.xLoc+1][this.yLoc] == false))
           {
-            if(0 <(humanArrZ.get(i).getx() - this.xLoc) && (humanArrZ.get(i).getx() - this.xLoc) <= 10)
+            if((0 <(humanArrZ.get(i).getx() - this.xLoc)) && ((humanArrZ.get(i).getx() - this.xLoc) <= 10) && (humanArrZ.get(i).gety() == this.yLoc))
             {
-              this.xLoc++;;
+              this.xLoc++;
+              return;
             }
+
           }
-          return;
+
         }
         //if the zombie is facing south and there is a human within ten spaces south
         else if(this.direction == 2)
         {
           if((yLoc-1>=0)&&(cit[this.xLoc][this.yLoc-1] == false))
           {
-            if(-10 < (humanArrZ.get(i).gety() - this.yLoc) && (humanArrZ.get(i).gety() - this.yLoc) <= 0)
+            if((-10 < (humanArrZ.get(i).gety() - this.yLoc)) && ((humanArrZ.get(i).gety() - this.yLoc) <= 0) && (humanArrZ.get(i).getx() == this.xLoc))
             {
               this.yLoc--;
+              return;
             }
+
           }
-          return;
+
 
         }
         //if the zombie is facing west and there is a human within ten spaces west
@@ -68,12 +94,14 @@ public class Zombie extends Person{
         {
           if((xLoc-1>=0)&&(cit[this.xLoc-1][this.yLoc]==false))
           {
-            if(-10 < (humanArrZ.get(i).getx() - this.xLoc) && (humanArrZ.get(i).getx() - this.xLoc) <= 0)
+            if((-10 < (humanArrZ.get(i).getx() - this.xLoc)) && ((humanArrZ.get(i).getx() - this.xLoc) <= 0) && (humanArrZ.get(i).gety() == this.yLoc))
             {
               this.xLoc--;
+              return;
             }
-          } 
-          return;         
+
+          }
+
         }
       }
     //if there are no humans within ten spaces zombie moves normally, 20% chance of turning
