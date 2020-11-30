@@ -1,4 +1,5 @@
 package zombies;
+import java.util.ArrayList;
 
 public abstract class Person{
   protected int xLoc;
@@ -15,6 +16,6 @@ public abstract class Person{
     this.cit = w;
   }
 
-  public abstract void move();
+  //public abstract void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ);
 
 }

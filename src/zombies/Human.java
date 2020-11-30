@@ -1,5 +1,6 @@
 package zombies;
 import util.*;
+import java.util.ArrayList;
 
 public class Human extends Person{
   
@@ -7,8 +8,29 @@ public class Human extends Person{
   {
     super(x,y,dir,w);
   }
+  //for directions, 0 is north, 1 is east, 2 is south, 3 is west
 
-  public void move()
+  public int getx()
+  {
+    return xLoc;
+  }
+
+  public int gety()
+  {
+    return yLoc;
+  }
+
+  public int getdir()
+  {
+    return direction;
+  }
+
+  public boolean[][] getw()
+  {
+    return cit;
+  }
+
+  public void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ)
   {
     int turn = Helper.nextInt(10);
     if(turn == 0)
@@ -20,44 +42,28 @@ public class Human extends Person{
     {
       if((yLoc+1<cit[0].length)&&(cit[this.xLoc][this.yLoc+1] == false))
       {
-        ZombieSim.dp.setPenColor(DotPanel.BLACK);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
         this.yLoc++;
-        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
       }
     }
     else if(this.direction == 1)
     {
       if((xLoc+1<cit.length)&&(cit[this.xLoc+1][this.yLoc] == false))
       {
-        ZombieSim.dp.setPenColor(DotPanel.BLACK);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
         this.xLoc++;
-        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
       }
     }
     else if(this.direction == 2)
     {
       if((yLoc-1>=0)&&(cit[this.xLoc][this.yLoc-1] == false))
       {
-        ZombieSim.dp.setPenColor(DotPanel.BLACK);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
         this.yLoc--;
-        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
       }
     }
     else
     {
       if((xLoc-1>=0)&&(cit[this.xLoc-1][this.yLoc]==false))
       {
-        ZombieSim.dp.setPenColor(DotPanel.BLACK);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
         this.xLoc--;
-        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
-        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
       }
     }
 

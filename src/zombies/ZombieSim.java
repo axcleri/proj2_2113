@@ -80,7 +80,6 @@ public class ZombieSim extends JFrame {
 			// Draw to screen and then refresh
 			world.draw();
 			dp.repaintAndSleep(33);
-
 		}
 	}
 
