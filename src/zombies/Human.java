@@ -1,38 +1,64 @@
 package zombies;
-import util.Helper;
+import util.*;
 
 public class Human extends Person{
   
-  public Human(int x, int y, int dir)
+  public Human(int x, int y, int dir, boolean[][] w)
   {
-    super(x,y,dir);
+    super(x,y,dir,w);
   }
 
   public void move()
   {
-    int turn = Helper.nextInt(9);
+    int turn = Helper.nextInt(10);
     if(turn == 0)
     {
-      this.direction = Helper.nextInt(3);
+      this.direction = Helper.nextInt(4);
+      
     }
-    if (this.direction == 0)
+    if(this.direction == 0)
     {
-      if(walls[x][yLoc+1] == false)
+      if((yLoc+1<cit[0].length)&&(cit[this.xLoc][this.yLoc+1] == false))
       {
+        ZombieSim.dp.setPenColor(DotPanel.BLACK);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
         this.yLoc++;
+        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
       }
     }
-    else if (this.direction == 1)
+    else if(this.direction == 1)
     {
-      this.xLoc++;
+      if((xLoc+1<cit.length)&&(cit[this.xLoc+1][this.yLoc] == false))
+      {
+        ZombieSim.dp.setPenColor(DotPanel.BLACK);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+        this.xLoc++;
+        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+      }
     }
     else if(this.direction == 2)
     {
-      this.yLoc--;
+      if((yLoc-1>=0)&&(cit[this.xLoc][this.yLoc-1] == false))
+      {
+        ZombieSim.dp.setPenColor(DotPanel.BLACK);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+        this.yLoc--;
+        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+      }
     }
     else
     {
-      this.xLoc--;
+      if((xLoc-1>=0)&&(cit[this.xLoc-1][this.yLoc]==false))
+      {
+        ZombieSim.dp.setPenColor(DotPanel.BLACK);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+        this.xLoc--;
+        ZombieSim.dp.setPenColor(DotPanel.LIGHT_GRAY);
+        ZombieSim.dp.drawDot(this.xLoc, this.yLoc);
+      }
     }
 
   }

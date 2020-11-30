@@ -3,6 +3,7 @@ package zombies;
 import util.Helper;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 
 public class City {
@@ -14,6 +15,7 @@ public class City {
 	 */
 	private boolean walls[][];
 	private int width, height;
+  private ArrayList<Human> humanArr = new ArrayList<Human>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -40,7 +42,18 @@ public class City {
 	 */
 	private void populate(int numPeople)
 	{
-		// Generate numPeople new humans randomly placed around the city.
+    for(int i = 0; i < numPeople; i++)
+    {
+      int xl = Helper.nextInt(width);
+      int yl = Helper.nextInt(height);
+      while(walls[xl][yl] == true)
+      {
+        xl = Helper.nextInt(width);
+        yl = Helper.nextInt(height);
+      }
+      Human h = new Human(xl, yl, Helper.nextInt(3), walls);
+      humanArr.add(h);
+    }
 	}
 
 
@@ -78,7 +91,10 @@ public class City {
 	 * Updates the state of the city for a time step.
 	 */
 	public void update() {
-		// Move humans, zombies, etc
+		for(int i = 0; i<humanArr.size(); i++)
+    {
+      humanArr.get(i).move();
+    }
 	}
 
 	/**
@@ -89,6 +105,7 @@ public class City {
 		ZombieSim.dp.clear(Color.black);
 
 		drawWalls();
+    drawHumans();
 	}
 
 	/**
@@ -109,5 +126,14 @@ public class City {
 			}
 		}
 	}
+
+  private void drawHumans()
+  {
+    ZombieSim.dp.setPenColor(Color.PINK);
+    for(int i = 0; i<humanArr.size(); i++)
+    {
+      ZombieSim.dp.drawDot(humanArr.get(i).xLoc, humanArr.get(i).yLoc);
+    }
+  }
 
 }
