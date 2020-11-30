@@ -16,6 +16,7 @@ public class City {
 	private boolean walls[][];
 	private int width, height;
   private ArrayList<Human> humanArr = new ArrayList<Human>();
+  private ArrayList<Zombie> zombieArr = new ArrayList<Zombie>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -42,10 +43,12 @@ public class City {
 	 */
 	private void populate(int numPeople)
 	{
+    int xl;
+    int yl;
     for(int i = 0; i < numPeople; i++)
     {
-      int xl = Helper.nextInt(width);
-      int yl = Helper.nextInt(height);
+      xl = Helper.nextInt(width);
+      yl = Helper.nextInt(height);
       while(walls[xl][yl] == true)
       {
         xl = Helper.nextInt(width);
@@ -54,6 +57,23 @@ public class City {
       Human h = new Human(xl, yl, Helper.nextInt(3), walls);
       humanArr.add(h);
     }
+    xl = Helper.nextInt(width);
+    yl = Helper.nextInt(height);
+    while(walls[xl][yl] == true)
+      {
+        xl = Helper.nextInt(width);
+        yl = Helper.nextInt(height);
+      }
+    for(int i = 0; i<humanArr.size(); i++)
+    {
+      if(humanArr.get(i).getx() == xl && humanArr.get(i).gety() == yl)
+      {
+        xl = Helper.nextInt(width);
+        yl = Helper.nextInt(height);
+      }
+    }
+    Zombie z = new Zombie(xl, yl, Helper.nextInt(3), walls);
+    zombieArr.add(z);
 	}
 
 
@@ -93,7 +113,11 @@ public class City {
 	public void update() {
 		for(int i = 0; i<humanArr.size(); i++)
     {
-      humanArr.get(i).move();
+      humanArr.get(i).move(humanArr, zombieArr);
+    }
+    for(int i = 0; i<zombieArr.size(); i++)
+    {
+      zombieArr.get(i).move(humanArr, zombieArr);
     }
 	}
 
@@ -129,10 +153,15 @@ public class City {
 
   private void drawHumans()
   {
-    ZombieSim.dp.setPenColor(Color.PINK);
+    ZombieSim.dp.setPenColor(Color.LIGHT_GRAY);
     for(int i = 0; i<humanArr.size(); i++)
     {
       ZombieSim.dp.drawDot(humanArr.get(i).xLoc, humanArr.get(i).yLoc);
+    }
+    ZombieSim.dp.setPenColor(Color.RED);
+    for(int i = 0; i<zombieArr.size(); i++)
+    {
+      ZombieSim.dp.drawDot(zombieArr.get(i).xLoc, zombieArr.get(i).yLoc);
     }
   }
 
