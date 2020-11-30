@@ -115,8 +115,9 @@ public class City {
     {
       humanArr.get(i).move(humanArr, zombieArr);
     }
-    for(int i = 0; i<zombieArr.size(); i++)
-    {
+	int temp = zombieArr.size();
+    for(int i = 0; i<temp; i++)
+	{
       zombieArr.get(i).move(humanArr, zombieArr);
     }
 	}

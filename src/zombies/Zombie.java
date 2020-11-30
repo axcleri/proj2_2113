@@ -15,7 +15,7 @@ public class Zombie extends Person{
       //if there is a human adjacent to the zombie turn human into zombie
       for(int i = 0; i < humanArrZ.size(); i++)
       {
-        if (humanArrZ.get(i).getx() == (this.xLoc - 1) || humanArrZ.get(i).getx() == (this.xLoc + 1) || humanArrZ.get(i).gety() == (this.yLoc - 1)  || humanArrZ.get(i).gety() == (this.yLoc + 1))
+        if ((humanArrZ.get(i).getx() - this.xLoc < 2 && humanArrZ.get(i).getx() - this.xLoc > -2) && (humanArrZ.get(i).gety() - this.yLoc < 2 && humanArrZ.get(i).gety() - this.yLoc > -2) )
         {
           Human temp = humanArrZ.get(i);
           humanArrZ.remove(i);
