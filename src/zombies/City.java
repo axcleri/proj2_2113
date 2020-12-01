@@ -13,10 +13,10 @@ public class City {
 	 *  else the space is free. Humans should never go into spaces that
 	 *  have a wall.
 	 */
-	private boolean walls[][];
+	protected boolean walls[][];
 	private int width, height;
-  private ArrayList<Human> humanArr = new ArrayList<Human>();
-  private ArrayList<Zombie> zombieArr = new ArrayList<Zombie>();
+  protected ArrayList<Human> humanArr = new ArrayList<Human>();
+  protected ArrayList<Zombie> zombieArr = new ArrayList<Zombie>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -175,6 +175,11 @@ public class City {
     {
       ZombieSim.dp.drawDot(zombieArr.get(i).xLoc, zombieArr.get(i).yLoc);
     }
+  }
+
+  protected void addZombie(int xl, int yl)
+  {
+
   }
 
 }

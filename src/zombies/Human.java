@@ -11,30 +11,6 @@ public class Human extends Person{
   }
   //for directions, 0 is north, 1 is east, 2 is south, 3 is west
 
-  //method to access xloc
-  public int getx()
-  {
-    return xLoc;
-  }
-
-  //method to access yLoc
-  public int gety()
-  {
-    return yLoc;
-  }
-
-  //method to access direction
-  public int getdir()
-  {
-    return direction;
-  }
-
-  //method to access the walls
-  public boolean[][] getw()
-  {
-    return cit;
-  }
-
   //method to decide where and how the human will move, depending on whether zombies are in sight or not
   public void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ)
   {

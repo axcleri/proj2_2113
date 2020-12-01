@@ -1,14 +1,13 @@
 package zombies;
 
 import util.DotPanel;
+import util.Helper;
 
 import java.awt.Color;
 import java.awt.Container;
 
-import javax.swing.JFrame;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.KeyEvent;
+import javax.swing.*;
+import java.awt.event.*;
 
 
 /*
@@ -21,7 +20,7 @@ import java.awt.event.KeyEvent;
  * We will add additional rules for dealing with sighting or running into zombies later.
  */
 
-public class ZombieSim extends JFrame {
+public class ZombieSim extends JFrame implements MouseListener {
 
 	private static final long serialVersionUID = -5176170979783243427L;
 
@@ -34,7 +33,7 @@ public class ZombieSim extends JFrame {
 	private static final int DOT_SIZE = 3;
 	private static final int NUM_HUMANS = 200;
 	private static final int NUM_BUILDINGS = 80;
-
+	protected City world;
 
 
 	/*
@@ -53,6 +52,7 @@ public class ZombieSim extends JFrame {
 		/* Add the panel to the frame */
 		Container cPane = this.getContentPane();
 		cPane.add(dp);
+		cPane.addMouseListener(this);
 
 		/* Initialize the DotPanel canvas:
 		 * You CANNOT draw to the panel BEFORE this code is called.
@@ -65,7 +65,7 @@ public class ZombieSim extends JFrame {
 		this.setVisible(true);
 
 		/* Create our city */
-		City world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
+		world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
 
 		/* This is the Run Loop (aka "simulation loop" or "game loop")
 		 * It will loop forever, first updating the state of the world
@@ -86,9 +86,21 @@ public class ZombieSim extends JFrame {
 		}
 	}
 
+
 	public static void main(String[] args) {
 		/* Create a new GUI window  */
 		new ZombieSim();
+	}
+
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		Zombie z = new Zombie(x, y, Helper.nextInt(3), world.walls);
+		world.zombieArr.add(z);
 	}
 
 }

@@ -16,6 +16,30 @@ public abstract class Person{
     this.cit = w;
   }
 
+  //method to access xLoc
+  public int getx()
+  {
+    return xLoc;
+  }
+
+  //method to access yLoc
+  public int gety()
+  {
+    return yLoc;
+  }
+
+  //method to access direction
+  public int getdir()
+  {
+    return direction;
+  }
+
+  //method to access walls
+  public boolean[][] getw()
+  {
+    return cit;
+  }
+
   public abstract void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ);
 
 }
