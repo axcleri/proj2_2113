@@ -45,33 +45,39 @@ public class City {
 	{
     int xl;
     int yl;
+    //for loop to create numPeople new humans
     for(int i = 0; i < numPeople; i++)
     {
       xl = Helper.nextInt(width);
       yl = Helper.nextInt(height);
+      //while loop makes sure a human won't spawn in a wall
       while(walls[xl][yl] == true)
       {
         xl = Helper.nextInt(width);
         yl = Helper.nextInt(height);
       }
+      //create new human using coordinates with a random direction and add it to the arraylist of humans
       Human h = new Human(xl, yl, Helper.nextInt(3), walls);
       humanArr.add(h);
     }
     xl = Helper.nextInt(width);
     yl = Helper.nextInt(height);
-    while(walls[xl][yl] == true)
+    //makes sure the zombie doesn't spawn in a wall
+    while(walls[xl][yl])
       {
         xl = Helper.nextInt(width);
         yl = Helper.nextInt(height);
       }
+    //makes sure the zombie doesn't spawn on top of a human
     for(int i = 0; i<humanArr.size(); i++)
     {
-      if(humanArr.get(i).getx() == xl && humanArr.get(i).gety() == yl)
+      if((humanArr.get(i).getx() == xl) && (humanArr.get(i).gety() == yl))
       {
         xl = Helper.nextInt(width);
         yl = Helper.nextInt(height);
       }
     }
+    //creates the zombie and adds it to the zombie arraylist with a random direction
     Zombie z = new Zombie(xl, yl, Helper.nextInt(3), walls);
     zombieArr.add(z);
 	}
@@ -111,14 +117,17 @@ public class City {
 	 * Updates the state of the city for a time step.
 	 */
 	public void update() {
+		//move all the humans first
 		for(int i = 0; i<humanArr.size(); i++)
     {
       humanArr.get(i).move(humanArr, zombieArr);
-    }
+	}
+		//get current size of zombie array and use in for loop, if you don't do this zombies turned in this update will move and you can end up with all zombies the first run through
 	int temp = zombieArr.size();
-    for(int i = 0; i<temp; i++)
+		//move all the zombies
+    for(int m = 0; m<temp; m++)
 	{
-      zombieArr.get(i).move(humanArr, zombieArr);
+      zombieArr.get(m).move(humanArr, zombieArr);
     }
 	}
 
@@ -155,11 +164,13 @@ public class City {
   private void drawHumans()
   {
     ZombieSim.dp.setPenColor(Color.LIGHT_GRAY);
+    //draw the humans in light gray
     for(int i = 0; i<humanArr.size(); i++)
     {
       ZombieSim.dp.drawDot(humanArr.get(i).xLoc, humanArr.get(i).yLoc);
     }
     ZombieSim.dp.setPenColor(Color.RED);
+    //draw the zombies in red
     for(int i = 0; i<zombieArr.size(); i++)
     {
       ZombieSim.dp.drawDot(zombieArr.get(i).xLoc, zombieArr.get(i).yLoc);
