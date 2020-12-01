@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JFrame;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 
 
 /*

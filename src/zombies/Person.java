@@ -16,6 +16,6 @@ public abstract class Person{
     this.cit = w;
   }
 
-  //public abstract void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ);
+  public abstract void move(ArrayList<Human> humanArrZ, ArrayList<Zombie> zombieArrZ);
 
 }
